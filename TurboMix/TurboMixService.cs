@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace TurboMix
 {
     public class TurboMixService : ITurboMixService
+
     {
         public IBasculaService basculaService { get; set; }
         public ICocinaService cocinaService { get; set; }
