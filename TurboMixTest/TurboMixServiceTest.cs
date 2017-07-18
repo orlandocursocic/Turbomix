@@ -15,7 +15,7 @@ namespace TurboMixTest
             var mockBasculaService = new Mock<IBasculaService>();
             var mockCocinaService = new Mock<ICocinaService>();
 
-            //       mockBasculaService.Setup(bascula => bascula.Pesar(It.IsAny<Alimento>())).Returns(1.5F);
+            //mockBasculaService.Setup(bascula => bascula.Pesar(It.IsAny<Alimento>())).Returns(1.5F);
             mockBasculaService.Setup(bascula => bascula.Pesar(It.IsAny<Alimento>())).Returns((Alimento p) => p.Peso);
             // mockBasculaService.Setup(bascula => bascula.Pesar(It.IsAny<Alimento>())).Returns(5F);
             mockBasculaService.Setup(bascula => bascula.Pesar(It.IsAny<Alimento>())).Returns((Alimento p) => p.Peso);
