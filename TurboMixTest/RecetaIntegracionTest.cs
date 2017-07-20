@@ -26,7 +26,7 @@ namespace TurboMixTest
         {
             IRecetaService sut = container.Resolve<IRecetaService>();
 
-            sut.Aniadir(receta);
+            sut.anyadeReceta(receta);
         }
     }
 }

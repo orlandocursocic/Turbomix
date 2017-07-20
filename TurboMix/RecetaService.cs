@@ -16,29 +16,114 @@ namespace TurboMix
             this.recetaRepository = _recetaRepository;
         }
 
-        public void Aniadir(Receta receta)
+        public void anyadeReceta(Receta receta)
         {
-            recetaRepository.Crear(receta);
+            IList<Receta> listaRecetas = recetaRepository.ShowAll();
+
+            bool bFound = false;
+            int i = 0;
+            while (!bFound && i < listaRecetas.Count())
+            {
+                if (listaRecetas.ElementAt(i).nombre.Equals(receta.nombre))
+                {
+                    bFound = true;
+                }
+                i++;
+            }
+
+            if (!bFound)
+            {
+                recetaRepository.Crear(receta);
+            }
+            else
+            {
+                throw new RecetaRepetidaException();
+            }
         }
 
-        public void Leer(String receta)
+        public void updateReceta(Receta receta)
         {
-            recetaRepository.Read(receta);
+            IList<Receta> listaRecetas = recetaRepository.ShowAll();
+
+            bool bFound = false;
+            int i = 0;
+            while (!bFound && i < listaRecetas.Count())
+            {
+                if (listaRecetas.ElementAt(i).nombre.Equals(receta.nombre))
+                {
+                    bFound = true;
+                }
+                i++;
+            }
+
+            if (!bFound)
+            {
+                throw new RecetaNoEncontradaException();
+            }
+            else
+            {
+                listaRecetas.ElementAt(i).alimentoPrincipal = receta.alimentoPrincipal;
+                listaRecetas.ElementAt(i).alimentoSecundario = receta.alimentoSecundario;
+
+                recetaRepository.Update(listaRecetas.ElementAt(i));
+            }
         }
 
-        public void Actualizar(Receta receta)
+        public void deleteReceta(Receta receta)
         {
-            recetaRepository.Update(receta);
+            IList<Receta> listaRecetas = recetaRepository.ShowAll();
+
+            bool bFound = false;
+            int i = 0;
+            while (!bFound && i < listaRecetas.Count())
+            {
+                if (listaRecetas.ElementAt(i).nombre.Equals(receta.nombre))
+                {
+                    bFound = true;
+                }
+                i++;
+            }
+
+            if (!bFound)
+            {
+                throw new RecetaNoEncontradaException();
+            }
+            else
+            {
+                recetaRepository.Delete(receta);
+            }
         }
 
-        public void Borrar(Receta receta)
+        public Receta receta(string nombreReceta)
         {
-            recetaRepository.Delete(receta);
+            IList<Receta> listaRecetas = recetaRepository.ShowAll();
+
+            Receta recetaAux;
+            bool bFound = false;
+            int i = 0;
+            while (!bFound && i < listaRecetas.Count())
+            {
+                if (listaRecetas.ElementAt(i).nombre.Equals(nombreReceta))
+                {
+                    bFound = true;
+                }
+                i++;
+            }
+
+            if (!bFound)
+            {
+                throw new RecetaNoEncontradaException();
+            }
+            else
+            {
+                recetaAux = listaRecetas.ElementAt(i);
+            }
+            return recetaAux;
         }
 
-        public void ListarTodo()
+        public IList<Receta> listReceta()
         {
-            recetaRepository.ShowAll();
+            return recetaRepository.ShowAll();
         }
     }
 }

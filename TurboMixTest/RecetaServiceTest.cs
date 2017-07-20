@@ -15,11 +15,11 @@ namespace TurboMixTest
             Receta receta = new Receta();
 
             IRecetaService sut = new RecetaService(mockRecetaRepository.Object);
-            sut.Aniadir(receta);
-            sut.Leer("");
-            sut.ListarTodo();
-            sut.Actualizar(receta);
-            sut.Borrar(receta);
+            sut.anyadeReceta(receta);
+            sut.receta("");
+            sut.listReceta();
+            sut.updateReceta(receta);
+            sut.deleteReceta(receta);
 
             mockRecetaRepository.Verify(recetaRepository => recetaRepository.Crear(It.IsAny<Receta>()), Times.Once);
             //mockRecetaRepository.Verify(recetaRepository => recetaRepository.Crear(It.IsAny<Receta>()), Times.Once);
